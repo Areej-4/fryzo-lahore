@@ -1,0 +1,9 @@
+.DS_Store
+*.pyc
+__pycache__/
+clean_layout.py
+fix_drawer_scroll.py
+set_official_phone.py
+update_easypaisa.py
+update_hint.py
+update_screenshot.py
