@@ -123,6 +123,15 @@ header.top {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.logo-wrap:hover {
+  transform: scale(1.05);
+}
+.logo-wrap:active {
+  transform: scale(0.96);
 }
 .logo-wrap img.mark {
   height: 48px;
@@ -135,12 +144,14 @@ header.top {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--mute);
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .dot {
   width: 9px;
@@ -198,6 +209,7 @@ header.top {
   gap: 8px;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
@@ -994,21 +1006,22 @@ footer a.cta { margin-top: 18px; }
 .fab {
   position: fixed;
   left: 50%;
-  bottom: 24px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%);
   z-index: 50;
   background: linear-gradient(135deg, #ffd04d 0%, #f5b818 55%, #df9400 100%);
   color: #0c0d10;
   border-radius: 999px;
-  padding: 13px 28px;
+  padding: 12px 26px;
   font-weight: 800;
-  font-size: 15.5px;
+  font-size: 15px;
   letter-spacing: 0.2px;
   box-shadow: 0 14px 36px rgba(245, 184, 24, 0.48), 0 0 0 2px rgba(255, 255, 255, 0.35);
   display: none; /* hidden completely when empty! */
   gap: 12px;
   align-items: center;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .fab:hover {
@@ -1417,8 +1430,56 @@ footer a.cta { margin-top: 18px; }
   .stage .s-main { width: 155px; right: 2%; }
   .stage .s-pizza { width: 230px; left: 2%; }
   .how { grid-template-columns: 1fr; }
-  .bar img.mark { height: 40px; }
+  .bar img.mark { height: 42px; }
   .cathead img { height: 60px; }
+}
+
+@media(max-width: 580px){
+  .bar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .logo-wrap img.mark {
+    height: 38px;
+  }
+  .status {
+    font-size: 11.5px;
+    padding: 5px 10px;
+    gap: 5px;
+  }
+  .status .hours-text {
+    display: none !important;
+  }
+  .cartbtn {
+    padding: 7px 13px;
+    font-size: 13px;
+    gap: 6px;
+  }
+  .cartbtn i {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    line-height: 20px;
+  }
+  .fab {
+    width: calc(100% - 24px);
+    max-width: 360px;
+    padding: 11px 16px;
+    font-size: 14px;
+    gap: 8px;
+    justify-content: space-between;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  .fab-badge {
+    padding: 3px 10px;
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 480px){
+  .grid.deals { grid-template-columns: 1fr; }
+  .grid.items { grid-template-columns: 1fr; }
+  .hero-headline { font-size: 32px; }
 }
 @media(prefers-reduced-motion:reduce){
   .dot, .stage .s-main, .stage .s-duo, .stage .s-pizza, .gold-shimmer, .stage-ring-outer, .cta::after, .sticker { animation: none; }
@@ -1466,13 +1527,13 @@ footer a.cta { margin-top: 18px; }
 
 <header class="top">
   <div class="bar">
-    <div class="logo-wrap">
+    <div class="logo-wrap" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Fryzo - Back to top">
       <img class="mark" id="logoTop" alt="Fryzo - Say Yes To Yumm">
     </div>
     <div class="status">
       <i class="dot" id="dot"></i>
       <span id="stat">Checking</span>
-      <span style="opacity:0.6">&bull; 3pm - 3am</span>
+      <span class="hours-text" style="opacity:0.6">&bull; 3pm - 3am</span>
     </div>
     <button class="cartbtn" id="cartbtn">
       <span>Order</span>
@@ -1492,7 +1553,7 @@ footer a.cta { margin-top: 18px; }
         <span>Open Till 3 AM</span>
       </div>
       
-      <img class="logo" id="logoHero" alt="Fryzo - Say Yes To Yumm">
+      <img class="logo" id="logoHero" alt="Fryzo - Say Yes To Yumm" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor:pointer;" title="Back to top">
       
       <h1 class="hero-headline">
         Say Yes To <span class="gold-shimmer">Unmatched Crunch</span> & Melted Cheese.
@@ -1583,7 +1644,7 @@ footer a.cta { margin-top: 18px; }
 <main id="menu"></main>
 
 <footer>
-  <img id="logoFoot" alt="Fryzo">
+  <img id="logoFoot" alt="Fryzo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor:pointer;" title="Back to top">
   <p><strong>Fryzo Lahore</strong> &bull; Shop No 4, Rasheed Plaza, T&amp;T Abpara Housing Society, Raiwind Road, Lahore</p>
   <p>Hotline WhatsApp: <strong>0328-4551176</strong> &bull; Easypaisa: <strong>0343-4096282</strong> &bull; 3:00 PM to 3:00 AM</p>
   <a class="cta" id="waFoot" href="https://wa.me/923284551176" target="_blank" rel="noopener">Message us on WhatsApp</a>
@@ -1760,6 +1821,8 @@ add("Chicken","Spicy injected broast","Full Broast","8 pieces, 4 buns, 4 dips, f
 add("Fries & pasta","Pasta","Mac n Cheese","",sl(400,600),0,"pasta");
 add("Fries & pasta","Pasta","Supreme Mac n Cheese","",sl(450,650),0,"pasta");
 add("Fries & pasta","Pasta","Crunchy Pasta","",sl(null,650),0,"pasta");
+
+
 
 
 
