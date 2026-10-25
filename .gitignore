@@ -7,3 +7,7 @@ set_official_phone.py
 update_easypaisa.py
 update_hint.py
 update_screenshot.py
+add_favicon_to_build.py
+fix_braces.py
+make_favicons.py
+update_mobile.py
